@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+</head>
+<body>
+    <h1>Guess the Number</h1>
+    <button type="button" id="startGame"><h4>Start the game</h4></button>
+    <div class="guessDiv"><span>guess:</span><span id="numberToGuess"></span></div>
+    <form id="guess_form" action="" method="GET">
+        <label for="inputNumber">How many positions are right?</label>
+        <input type="number" id="inputNumber" name="inputNumber" required>
+        <button type="submit" id="inputButton" disabled>Submit Guess</button>
+    </form>
+    <p id="result"></p>
+    <p id="tries"></p>
+    <p id="test"></p>
+    <div id="inputNumber"></div>
+    <p id="error"></p>
+    <script src="guess.js"></script>
+    
+</body>
+</html>
