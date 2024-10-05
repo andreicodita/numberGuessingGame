@@ -604,9 +604,12 @@ function findDigits(){
           } 
         if(cntPermutations == 0)
           {
-            if(nr[1] || -1 || nr[2] != -1 || nr[3] != 1 || i == 0)
-              cntPermutations++;
-            else
+            if(nr[1] != -1 || nr[2] != -1 || nr[3] != -1)
+              {cntPermutations++;
+                console.log('da');
+              console.log(i);
+              }
+            else if(i != 0)
             {
               currentDigit = i;
               rightDigitsGuess(3, i);
@@ -618,7 +621,7 @@ function findDigits(){
           }
         if(cntPermutations == 1)
           {
-            if(inputNumber == v[i] && inputsTaken[inputNumber] >= 0 && inputNumber != 0)
+            if(inputNumber == v[i] && inputsTaken[inputNumber] >= 0 && i != 0)
             {
               foundADigit(i, i, i, -1);
               outputNumber();
@@ -634,14 +637,13 @@ function findDigits(){
               document.getElementById('error').innerHTML = "your input does not match the correct number of positions";
               break;
             }
-            else if(nr[2] != -1 && nr[3] != -1)
+            else if(nr[2] != -1 || nr[3] != -1 || nr[4] != -1)
               cntPermutations++;
             else
             {
               currentDigit = i;
               wrongDigitsGuess(1, zeroDigit);
-              rightDigitsGuess(2, i);
-              wrongDigitsGuess(1, zeroDigit);
+              rightDigitsGuess(3, i);
               outputGuess();
               cntPermutations++;
               break;
@@ -651,7 +653,7 @@ function findDigits(){
         {
           if(inputNumber == v[i] && inputsTaken[inputNumber] >= 0 && inputNumber != 0)
           {
-            foundADigit(-1, i, i, -1);
+            foundADigit(-1, i, i, i);
             outputNumber();
             cntPermutations = 0;
             v[i] = 0;
@@ -665,20 +667,50 @@ function findDigits(){
               document.getElementById('error').innerHTML = "your input does not match the correct number of positions";
               break;
             }
-          else if(nr[3] != -1 && nr[4] != -1)
+          else if(nr[1] != -1 || nr[2] != -1 || nr[4] != -1)
           {
             cntPermutations++;
           }
           else
           {
             currentDigit = i;
-            wrongDigitsGuess(2, zeroDigit);
             rightDigitsGuess(2, i);
+            wrongDigitsGuess(1, zeroDigit);
+            rightDigitsGuess(1, i);
             outputGuess();
             cntPermutations++;
             break;
           }
         }
+        if(cntPermutations == 3)
+          {
+            if(inputNumber == v[i] && inputsTaken[inputNumber] >= 0 && inputNumber != 0)
+            {
+              foundADigit(i, i, -1, i);
+              outputNumber();
+              cntPermutations = 0;
+              v[i] = 0;
+              inputNumber = 0;
+              findDigits();
+              break;
+            }
+            else if(inputsTaken[inputNumber] == 0 && inputNumber != 0)
+              {
+                console.log('your input does not match the correct number of positions');
+                document.getElementById('error').innerHTML = "your input does not match the correct number of positions";
+                break;
+              }
+            else if(nr[1] == -1 && nr[3] == -1 && nr[4] == -1)
+            {
+              foundADigit(i, -1, i, i);
+              outputNumber();
+              cntPermutations = 0;
+              v[i] = 0;
+              inputNumber = 0;
+              findDigits();
+              break;
+            }
+          }
       } 
     }        
   }    
